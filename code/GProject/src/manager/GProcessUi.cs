@@ -43,17 +43,24 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_INIT(string[] args) {
-        Console.WriteLine("run_INIT");
+        Console.Write("\n");
+        Console.Write("CSHARP_ADMIN !!!\n");
+        Console.Write("\t{0,-2} : {1}\n", "-q", "quitter l'application");
+        Console.Write("\n");
         G_STATE = "S_LOAD";
     }
     //===============================================
     public void run_METHOD(string[] args) {
-        Console.WriteLine("run_METHOD");
+        Console.Write("CSHARP_ADMIN :\n");
+        Console.Write("\t{0,-2} : {1}\n", "1", "SQlite");
+        Console.Write("\t{0,-2} : {1}\n", "2", "OpenCV");
+        Console.Write("\n");
         G_STATE = "S_CHOICE";
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        Console.WriteLine("run_CHOICE");
+        string lLast = "new";
+        Console.Write("CSHARP_ADMIN ({0}) ? : ", lLast);
         G_STATE = "S_SQLITE";
     }
     //===============================================
@@ -63,17 +70,14 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_SAVE(string[] args) {
-        Console.WriteLine("run_SAVE");
         G_STATE = "S_QUIT";
     }
     //===============================================
     public void run_LOAD(string[] args) {
-        Console.WriteLine("run_LOAD");
         G_STATE = "S_METHOD";
     }
     //===============================================
     public void run_QUIT(string[] args) {
-        Console.WriteLine("run_QUIT");
         G_STATE = "S_END";
     }
     //===============================================
