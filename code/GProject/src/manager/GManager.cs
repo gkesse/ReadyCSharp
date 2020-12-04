@@ -74,12 +74,12 @@ public sealed class GManager {
 //===============================================
 // struct
 //===============================================
-public struct sGManager {
-    sGApp app;
+struct sGManager {
+    public sGApp app;
 }
 //===============================================
-public struct sGApp {
+struct sGApp {
     // app
-    string app_name;
+    public string app_name;
 }
 //===============================================
