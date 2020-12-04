@@ -36,8 +36,7 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        sGApp lApp = GManager.Instance.getData().app;
-        Console.WriteLine(GManager.Instance.getEnv("GPDF_PATH"));
+        GManager.Instance.system("echo ooooooooooooooooooooo");
     }
     //===============================================
     public void runUi(string[] args) {
