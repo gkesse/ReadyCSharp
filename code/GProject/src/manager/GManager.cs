@@ -21,6 +21,7 @@ public sealed class GManager {
         // app
         mgr.app = new sGApp();
         mgr.app.app_name = "ReadyApp";
+        mgr.app.cmd_path = getEnv("GCMD_PATH");
     }
     //===============================================
     public static GManager Instance {
@@ -81,5 +82,7 @@ struct sGManager {
 struct sGApp {
     // app
     public string app_name;
+    // cmd
+    public string cmd_path;
 }
 //===============================================
