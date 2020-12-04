@@ -1,2 +1,2 @@
 @echo off
-echo bonjour tout le monde
+bin\gp_csharp ui

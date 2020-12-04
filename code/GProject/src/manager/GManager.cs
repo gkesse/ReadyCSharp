@@ -1,6 +1,7 @@
 //===============================================
 using System;
 using System.Diagnostics;
+using System.IO;
 //===============================================
 // manager
 //===============================================
@@ -51,9 +52,15 @@ public sealed class GManager {
         Console.Write("]\n");
     }
     //===============================================
+    public void showData(string data) {
+        Console.Write(data + "\n");
+    }
+    //===============================================
     // system
     //===============================================
     public string system(string command) {
+        File.WriteAllText(mgr.app.cmd_path, "@echo off\n");
+        File.AppendAllText(mgr.app.cmd_path, command + "\n");
         Process lProcess = new Process();
         lProcess.StartInfo.UseShellExecute = false;
         lProcess.StartInfo.RedirectStandardOutput = true;
