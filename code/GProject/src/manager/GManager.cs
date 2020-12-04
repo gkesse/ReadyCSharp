@@ -2,6 +2,8 @@
 using System;
 using System.Diagnostics;
 //===============================================
+// manager
+//===============================================
 public sealed class GManager {
     //===============================================
     // property
@@ -41,20 +43,30 @@ public sealed class GManager {
     // system
     //===============================================
     public void system(string command) {
-        Process cmd = new Process();
-cmd.StartInfo.FileName = "cmd.exe";
-cmd.StartInfo.RedirectStandardInput = true;
-cmd.StartInfo.RedirectStandardOutput = true;
-cmd.StartInfo.CreateNoWindow = true;
-cmd.StartInfo.UseShellExecute = false;
-cmd.Start();
-
-cmd.StandardInput.WriteLine(@"echo Oscar");
-cmd.StandardInput.Flush();
-cmd.StandardInput.Close();
-cmd.WaitForExit();
-Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+    /*Process p = new Process();
+    // Redirect the output stream of the child process.
+    p.StartInfo.UseShellExecute = false;
+    p.StartInfo.RedirectStandardOutput = true;
+    p.StartInfo.FileName = "echo oooooo";
+    p.Start();
+    // Do not wait for the child process to exit before
+    // reading to the end of its redirected stream.
+    // p.WaitForExit();
+    // Read the output stream first and then wait.
+    string output = p.StandardOutput.ReadToEnd();
+    p.WaitForExit();*/
+    }
+    //===============================================
+    // env
+    //===============================================
+    public string getEnv(string lKey) {
+        string lValue = Environment.GetEnvironmentVariable(lKey);
+        Console.Write("{0}\n", lValue);
+        return lValue;
     }
     //===============================================
 }
+//===============================================
+// struct
+//===============================================
 //===============================================
