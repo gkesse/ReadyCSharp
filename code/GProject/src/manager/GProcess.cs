@@ -36,7 +36,8 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        GManager.Instance.showData(GManager.Instance.system("bin\\gp_csharp ui"));
+        sGApp lApp = GManager.Instance.getData().app;
+        GManager.Instance.showData(GManager.Instance.system(lApp.bin_path + " ui"));
     }
     //===============================================
     public void runUi(string[] args) {

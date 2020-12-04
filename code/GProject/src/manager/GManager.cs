@@ -23,6 +23,7 @@ public sealed class GManager {
         mgr.app = new sGApp();
         mgr.app.app_name = "ReadyApp";
         mgr.app.cmd_path = getEnv("GCMD_PATH");
+        mgr.app.bin_path = getEnv("GBIN_PATH");
     }
     //===============================================
     public static GManager Instance {
@@ -91,5 +92,7 @@ public struct sGApp {
     public string app_name;
     // cmd
     public string cmd_path;
+    // bin
+    public string bin_path;
 }
 //===============================================

@@ -1,2 +1,2 @@
 @echo off
-bin\gp_csharp ui
+C:\Users\Admin\Downloads\Programs\ReadyCSharp\win\bin\gp_csharp.exe ui
