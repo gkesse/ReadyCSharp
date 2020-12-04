@@ -3,8 +3,12 @@ using System;
 //===============================================
 public sealed class GProcess {
     //===============================================
+    // property
+    //===============================================
     private static GProcess m_instance = null;
     private static readonly object padlock = new object();
+    //===============================================
+    // constructor
     //===============================================
     GProcess() {
 
@@ -21,22 +25,22 @@ public sealed class GProcess {
         }
     }
     //===============================================
+    // method
+    //===============================================
     public void run(string[] args) {
-        GManager.Instance.showData(args);
-        Console.WriteLine(args.Length);
         string lKey = "test";
-        if(args.Length > 1) lKey = args[1];
+        if(args.Length > 0) lKey = args[0];
         if(lKey == "test") {runTest(args); return;}
         if(lKey == "ui") {runUi(args); return;}
         runTest(args);
     }
     //===============================================
     public void runTest(string[] args) {
-        Console.WriteLine("runTest");
+        GManager.Instance.system("echo ooooooooooooooooooooo");
     }
     //===============================================
     public void runUi(string[] args) {
-        Console.WriteLine("runUi");
+        GProcessUi.Instance.run(args);
     }
     //===============================================
 }

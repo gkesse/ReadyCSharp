@@ -37,5 +37,11 @@ public sealed class GManager {
         Console.Write("]\n");
     }
     //===============================================
+    // system
+    //===============================================
+    public void system(string command) {
+        System.Diagnostics.Process.Start("CMD.exe", command);
+    }
+    //===============================================
 }
 //===============================================
