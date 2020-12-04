@@ -54,7 +54,7 @@ public sealed class GManager {
     // system
     //===============================================
     public void system(string command) {
-        Process p = new Process();
+        Process lProcess = new Process();
         lProcess.StartInfo.UseShellExecute = false;
         lProcess.StartInfo.RedirectStandardOutput = true;
         lProcess.StartInfo.FileName = mgr.app.cmd_path;
