@@ -83,7 +83,7 @@ public struct sGManager {
     public sGApp app;
 }
 //===============================================
-struct sGApp {
+public struct sGApp {
     // app
     public string app_name;
     // cmd
