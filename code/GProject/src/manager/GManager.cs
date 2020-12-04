@@ -11,10 +11,16 @@ public sealed class GManager {
     private static GManager m_instance = null;
     private static readonly object padlock = new object();
     //===============================================
+    private sGManager mgr;
+    //===============================================
     // constructor
     //===============================================
     GManager() {
-
+        // manager
+        mgr = new sGManager();
+        // app
+        mgr.app = new sGApp();
+        mgr.app.app_name = "ReadyApp";
     }
     //===============================================
     public static GManager Instance {
@@ -61,7 +67,6 @@ public sealed class GManager {
     //===============================================
     public string getEnv(string lKey) {
         string lValue = Environment.GetEnvironmentVariable(lKey);
-        Console.Write("{0}\n", lValue);
         return lValue;
     }
     //===============================================
@@ -69,4 +74,12 @@ public sealed class GManager {
 //===============================================
 // struct
 //===============================================
+public struct sGManager {
+    sGApp app;
+}
+//===============================================
+public struct sGApp {
+    // app
+    string app_name;
+}
 //===============================================
