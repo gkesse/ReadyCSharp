@@ -37,6 +37,10 @@ public sealed class GManager {
     //===============================================
     // data
     //===============================================
+    public sGManager getData() {
+        return mgr;
+    }
+    //===============================================
     public void showData(string[] data) {
         Console.Write("[");
         for(int i = 0; i < data.Length; i++) {
@@ -75,7 +79,7 @@ public sealed class GManager {
 //===============================================
 // struct
 //===============================================
-struct sGManager {
+public struct sGManager {
     public sGApp app;
 }
 //===============================================
