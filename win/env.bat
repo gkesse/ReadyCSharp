@@ -12,5 +12,5 @@ set "GSQLITE_DB_PATH=%GDATA_PATH%\sqlite\config.dat"
 set "GFONT_PATH=%GDATA_PATH%\font"
 set "GIMG_PATH=%GDATA_PATH%\img"
 set "GPDF_PATH=%GDATA_PATH%\pdf\config.pdf"
-set "GCMD_PATH=%GDATA_PATH%\cmd\cmd.bat"
+set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 ::===============================================

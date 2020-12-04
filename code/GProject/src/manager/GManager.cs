@@ -53,15 +53,16 @@ public sealed class GManager {
     //===============================================
     // system
     //===============================================
-    public void system(string command) {
+    public string system(string command) {
         Process lProcess = new Process();
         lProcess.StartInfo.UseShellExecute = false;
         lProcess.StartInfo.RedirectStandardOutput = true;
         lProcess.StartInfo.FileName = mgr.app.cmd_path;
         lProcess.Start();
-        string output = lProcess.StandardOutput.ReadToEnd();
-        Console.Write(output + "\n");
+        string lOutput = lProcess.StandardOutput.ReadToEnd();
+        Console.Write(lOutput + "\n");
         lProcess.WaitForExit();
+        return lOutput;
     }
     //===============================================
     // env
