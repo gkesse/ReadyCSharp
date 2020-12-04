@@ -28,13 +28,13 @@ public sealed class GManager {
     // data
     //===============================================
     public void showData(string[] data) {
-        Console.WriteLine("[");
+        Console.Write("[");
         for(int i = 0; i < data.Length; i++) {
-            if(i != 0) Console.WriteLine(" ; ");
+            if(i != 0) Console.Write(" ; ");
             string lData = data[i];
-            Console.WriteLine(lData);
+            Console.Write(lData);
         }
-        Console.WriteLine("]");
+        Console.Write("]\n");
     }
     //===============================================
 }
