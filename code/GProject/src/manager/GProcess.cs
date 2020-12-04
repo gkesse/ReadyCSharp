@@ -36,7 +36,7 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        GManager.Instance.system("echo ooooooooooooooooooooo");
+        GManager.Instance.system("/C echo ooooooooooooooooooooo");
     }
     //===============================================
     public void runUi(string[] args) {
