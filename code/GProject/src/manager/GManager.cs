@@ -60,7 +60,6 @@ public sealed class GManager {
         lProcess.StartInfo.FileName = mgr.app.cmd_path;
         lProcess.Start();
         string lOutput = lProcess.StandardOutput.ReadToEnd();
-        Console.Write(lOutput + "\n");
         lProcess.WaitForExit();
         return lOutput;
     }
