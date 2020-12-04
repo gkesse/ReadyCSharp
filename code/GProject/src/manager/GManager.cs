@@ -55,17 +55,13 @@ public sealed class GManager {
     //===============================================
     public void system(string command) {
         Process p = new Process();
-        // Redirect the output stream of the child process.
-        p.StartInfo.UseShellExecute = false;
-        p.StartInfo.RedirectStandardOutput = true;
-        p.StartInfo.FileName = mgr.app.app_name;
-        p.Start();
-        // Do not wait for the child process to exit before
-        // reading to the end of its redirected stream.
-        // p.WaitForExit();
-        // Read the output stream first and then wait.
-        string output = p.StandardOutput.ReadToEnd();
-        p.WaitForExit();
+        lProcess.StartInfo.UseShellExecute = false;
+        lProcess.StartInfo.RedirectStandardOutput = true;
+        lProcess.StartInfo.FileName = mgr.app.cmd_path;
+        lProcess.Start();
+        string output = lProcess.StandardOutput.ReadToEnd();
+        Console.Write(output + "\n");
+        lProcess.WaitForExit();
     }
     //===============================================
     // env
