@@ -36,8 +36,8 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        GManager.Instance.getData();
-        //Console.WriteLine(lApp.cmd_path);
+        sGApp lApp = GManager.Instance.getData().app;
+        Console.WriteLine(GManager.Instance.getEnv("GDATA_PATH"));
     }
     //===============================================
     public void runUi(string[] args) {
