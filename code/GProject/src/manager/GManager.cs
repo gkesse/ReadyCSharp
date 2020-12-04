@@ -1,42 +1,40 @@
 //===============================================
 using System;
 //===============================================
-public sealed class GProcess {
+public sealed class GManager {
     //===============================================
-    private static GProcess m_instance = null;
+    // property
+    //===============================================
+    private static GManager m_instance = null;
     private static readonly object padlock = new object();
     //===============================================
-    GProcess() {
+    // constructor
+    //===============================================
+    GManager() {
 
     }
     //===============================================
-    public static GProcess Instance {
+    public static GManager Instance {
         get {
             lock (padlock) {
                 if (m_instance == null) {
-                    m_instance = new GProcess();
+                    m_instance = new GManager();
                 }
                 return m_instance;
             }
         }
     }
     //===============================================
-    public void run(string[] args) {
-        GManager.Instance.showData(args);
-        Console.WriteLine(args.Length);
-        string lKey = "test";
-        if(args.Length > 1) lKey = args[1];
-        if(lKey == "test") {runTest(args); return;}
-        if(lKey == "ui") {runUi(args); return;}
-        runTest(args);
-    }
+    // data
     //===============================================
-    public void runTest(string[] args) {
-        Console.WriteLine("runTest");
-    }
-    //===============================================
-    public void runUi(string[] args) {
-        Console.WriteLine("runUi");
+    public void showData(string[] data) {
+        Console.WriteLine("[");
+        for(int i = 0; i < data.Length; i++) {
+            if(i != 0) Console.WriteLine(" ; ");
+            string lData = data[i];
+            Console.WriteLine(lData);
+        }
+        Console.WriteLine("]");
     }
     //===============================================
 }
