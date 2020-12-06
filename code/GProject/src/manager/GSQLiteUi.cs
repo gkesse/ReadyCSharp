@@ -1,22 +1,22 @@
 //===============================================
 using System;
 //===============================================
-public sealed class GProcessUi {
+public sealed class GSQLiteUi {
     //===============================================
-    private static GProcessUi m_instance = null;
+    private static GSQLiteUi m_instance = null;
     private static readonly object padlock = new object();
     //===============================================
     private string G_STATE;
     //===============================================
-    GProcessUi() {
+    GSQLiteUi() {
 
     }
     //===============================================
-    public static GProcessUi Instance {
+    public static GSQLiteUi Instance {
         get {
             lock (padlock) {
                 if (m_instance == null) {
-                    m_instance = new GProcessUi();
+                    m_instance = new GSQLiteUi();
                 }
                 return m_instance;
             }
@@ -26,54 +26,54 @@ public sealed class GProcessUi {
     public void run(string[] args) {
         G_STATE = "S_INIT";
         while(true) {
-            if(G_STATE == "S_INIT") {run_INIT(args);}
+            if(G_STATE == "S_ADMIN") {run_ADMIN(args);}
+            else if(G_STATE == "S_INIT") {run_INIT(args);}
             else if(G_STATE == "S_METHOD") {run_METHOD(args);}
             else if(G_STATE == "S_CHOICE") {run_CHOICE(args);}
             //
-            else if(G_STATE == "S_SQLITE") {run_SQLITE(args);}
-            else if(G_STATE == "S_OPENCV") {run_OPENCV(args);}
+            else if(G_STATE == "S_SHOW_TABLES") {run_SHOW_TABLES(args);}
             //
             else if(G_STATE == "S_SAVE") {run_SAVE(args);}
             else if(G_STATE == "S_LOAD") {run_LOAD(args);}
+            else if(G_STATE == "S_QUIT") {run_QUIT(args);}
             else break;
         }
     }
     //===============================================
+    public void run_ADMIN(string[] args) {
+        G_STATE = "S_END";
+    }
+    //===============================================
     public void run_INIT(string[] args) {
         Console.Write("\n");
-        Console.Write("CSHARP_ADMIN !!!\n");
+        Console.Write("SQLITE_ADMIN !!!\n");
         Console.Write("\t{0,-2} : {1}\n", "-q", "quitter l'application");
         Console.Write("\n");
         G_STATE = "S_LOAD";
     }
     //===============================================
     public void run_METHOD(string[] args) {
-        Console.Write("CSHARP_ADMIN :\n");
-        Console.Write("\t{0,-2} : {1}\n", "1", "S_SQLITE");
-        Console.Write("\t{0,-2} : {1}\n", "2", "S_OPENCV");
+        Console.Write("SQLITE_ADMIN :\n");
+        Console.Write("\t{0,-2} : {1}\n", "1", "afficher les tables");
+        Console.Write("\t{0,-2} : {1}\n", "2", "creer la table CONFIG_SHARP");
+        Console.Write("\t{0,-2} : {1}\n", "3", "supprimer la table CONFIG_SHARP");
         Console.Write("\n");
         G_STATE = "S_CHOICE";
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = "2";
-        Console.Write("CSHARP_ADMIN ({0}) ? : ", lLast);
+        string lLast = "new";
+        Console.Write("SQLITE_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
         if(lAnswer == "-q") G_STATE = "S_END";
         //
-        else if(lAnswer == "1") {G_STATE = "S_SQLITE";} 
-        else if(lAnswer == "2") {G_STATE = "S_OPENCV";}
+        else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES";} 
         //
     }
     //===============================================
-    public void run_SQLITE(string[] args) {
-        GSQLiteUi.Instance.run(args);
-        G_STATE = "S_SAVE";
-    }
-    //===============================================
-    public void run_OPENCV(string[] args) {
-        Console.WriteLine("run_OPENCV");
+    public void run_SHOW_TABLES(string[] args) {
+        Console.WriteLine("run_SHOW_TABLES");
         G_STATE = "S_SAVE";
     }
     //===============================================
@@ -83,6 +83,10 @@ public sealed class GProcessUi {
     //===============================================
     public void run_LOAD(string[] args) {
         G_STATE = "S_METHOD";
+    }
+    //===============================================
+    public void run_QUIT(string[] args) {
+        G_STATE = "S_END";
     }
     //===============================================
 }
