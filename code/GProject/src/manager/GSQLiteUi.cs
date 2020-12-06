@@ -48,6 +48,9 @@ public sealed class GSQLiteUi {
         Console.Write("\n");
         Console.Write("SQLITE_ADMIN !!!\n");
         Console.Write("\t{0,-2} : {1}\n", "-q", "quitter l'application");
+        Console.Write("\t{0,-2} : {1}\n", "-i", "reinitialiser l'application");
+        Console.Write("\t{0,-2} : {1}\n", "-a", "redemarrer l'application");
+        Console.Write("\t{0,-2} : {1}\n", "-v", "valider les configurations");
         Console.Write("\n");
         G_STATE = "S_LOAD";
     }
@@ -62,11 +65,13 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = "new";
+        string lLast = "2";
         Console.Write("SQLITE_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
         if(lAnswer == "-q") G_STATE = "S_END";
+        else if(lAnswer == "-i") G_STATE = "S_INIT";
+        else if(lAnswer == "-a") G_STATE = "S_ADMIN";
         //
         else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES";} 
         //
@@ -86,7 +91,14 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_QUIT(string[] args) {
-        G_STATE = "S_END";
+        Console.Write("CSHARP_QUIT (Oui/[N]on) ? : ");
+        string lAnswer = Console.ReadLine();
+        if(lAnswer == "-q") G_STATE = "S_END";
+        else if(lAnswer == "-i") G_STATE = "S_INIT";
+        else if(lAnswer == "-a") G_STATE = "S_ADMIN";
+        else if(lAnswer == "o") {G_STATE = "S_END";} 
+        else if(lAnswer == "n") {G_STATE = "S_INIT";} 
+        else if(lAnswer == "") {G_STATE = "S_INIT";} 
     }
     //===============================================
 }

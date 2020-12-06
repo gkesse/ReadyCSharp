@@ -56,7 +56,7 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = "2";
+        string lLast = "3";
         Console.Write("CSHARP_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
