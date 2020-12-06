@@ -41,6 +41,7 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_ADMIN(string[] args) {
+        GProcessUi.Instance.run(args);
         G_STATE = "S_END";
     }
     //===============================================
@@ -65,7 +66,7 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = "2";
+        string lLast = GConfig.Instance.getData("G_SQLITE_ID");
         Console.Write("SQLITE_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
@@ -73,7 +74,7 @@ public sealed class GSQLiteUi {
         else if(lAnswer == "-i") G_STATE = "S_INIT";
         else if(lAnswer == "-a") G_STATE = "S_ADMIN";
         //
-        else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES";} 
+        else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES"; GConfig.Instance.setData("G_SQLITE_ID", lAnswer);} 
         //
     }
     //===============================================
@@ -91,6 +92,7 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_QUIT(string[] args) {
+        Console.Write("\n");
         Console.Write("CSHARP_QUIT (Oui/[N]on) ? : ");
         string lAnswer = Console.ReadLine();
         if(lAnswer == "-q") G_STATE = "S_END";

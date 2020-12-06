@@ -56,14 +56,14 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = "3";
+        string lLast = GConfig.Instance.getData("G_CSHARP_ID");
         Console.Write("CSHARP_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
         if(lAnswer == "-q") G_STATE = "S_END";
         //
-        else if(lAnswer == "1") {G_STATE = "S_SQLITE";} 
-        else if(lAnswer == "2") {G_STATE = "S_OPENCV";}
+        else if(lAnswer == "1") {G_STATE = "S_SQLITE"; GConfig.Instance.setData("G_CSHARP_ID", lAnswer);} 
+        else if(lAnswer == "2") {G_STATE = "S_OPENCV"; GConfig.Instance.setData("G_CSHARP_ID", lAnswer);}
         //
     }
     //===============================================
