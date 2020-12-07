@@ -24,6 +24,7 @@ public sealed class GManager {
         mgr.app.app_name = "ReadyApp";
         mgr.app.cmd_path = getEnv("GCMD_PATH");
         mgr.app.bin_path = getEnv("GBIN_PATH");
+        mgr.app.sqlite_db_path = getEnv("GSQLITE_DB_PATH");
     }
     //===============================================
     public static GManager Instance {
@@ -94,5 +95,7 @@ public struct sGApp {
     public string cmd_path;
     // bin
     public string bin_path;
+    // sqlite
+    string sqlite_db_path;
 }
 //===============================================

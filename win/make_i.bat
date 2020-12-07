@@ -1,4 +1,4 @@
 @echo off
 ::===============================================
-mingw32-make -f Makefile.mingw.mak argv="%*"
+mingw32-make -f Makefile.csc.mak argv="%*"
 ::===============================================

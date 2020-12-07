@@ -1,4 +1,4 @@
 @echo off
 ::===============================================
-mingw32-make -f Makefile.csc.mak %*
+mingw32-make -f Makefile.dotnet.mak %*
 ::===============================================
