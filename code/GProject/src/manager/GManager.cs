@@ -96,6 +96,6 @@ public struct sGApp {
     // bin
     public string bin_path;
     // sqlite
-    string sqlite_db_path;
+    public string sqlite_db_path;
 }
 //===============================================

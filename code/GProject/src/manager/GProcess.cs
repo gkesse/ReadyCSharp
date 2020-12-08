@@ -36,8 +36,7 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        sGApp lApp = GManager.Instance.getData().app;
-        GManager.Instance.showData(GManager.Instance.system(lApp.bin_path + " ui"));
+        GSQLite.Instance.queryValue("ooo");
     }
     //===============================================
     public void runUi(string[] args) {
