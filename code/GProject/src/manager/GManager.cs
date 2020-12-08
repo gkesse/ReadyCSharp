@@ -80,6 +80,16 @@ public sealed class GManager {
         return lValue;
     }
     //===============================================
+    // string
+    //===============================================
+    public int getWidth(string widthMap, int index, int defaultWidth) {
+        string[] lWidthMap = widthMap.Split(';');
+        int lLength = lWidthMap.Length;
+        if(index >= lLength) return defaultWidth;
+        int lWidth = int.Parse(lWidthMap[index]);
+        return lWidth;
+    }
+    //===============================================
 }
 //===============================================
 // struct

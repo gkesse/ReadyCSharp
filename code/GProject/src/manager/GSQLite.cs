@@ -13,9 +13,15 @@ public sealed class GSQLite {
         lQuery = @"
         create table if not exists config_data (
         config_key text,
-        config_value text
-        )";
+        config_value text)
+        ";
         queryWrite(lQuery);
+        // tables
+        lQuery = @"
+        select * from sqlite_master
+        where type = 'table'
+        ";
+        queryShow(lQuery);
     }
     //===============================================
     public static GSQLite Instance {
@@ -43,6 +49,74 @@ public sealed class GSQLite {
         SQLiteCommand lCmd = open();
         lCmd.CommandText = sqlQuery;
         lCmd.ExecuteNonQuery();
+    }
+    //===============================================
+    public void queryShow(string sqlQuery) {
+        SQLiteCommand lCmd = open();
+        lCmd.CommandText = sqlQuery;
+        SQLiteDataReader lReader = lCmd.ExecuteReader();
+        //
+        string widthMap = "20;20;20;10";
+        int defaultWidth = 30;
+        string[] lWidthMap = widthMap.Split(';');
+        // sep
+        Console.Write("+-");
+        for(int i = 0; i < lReader.FieldCount; i++) {
+            if(i != 0) Console.Write("-+-");
+            string lData = lReader.GetName(i);
+            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            for(int j = 0; j < lWidth; j++) {
+                Console.Write("-");
+            }
+        }
+        Console.Write("-+");
+        Console.Write("\n");
+        // header
+        Console.Write("| ");
+        for(int i= 0; i < lReader.FieldCount; i++) {
+            if(i != 0) Console.Write(" | ");
+            string lData = lReader.GetName(i);
+            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            Console.Write("{0," + (-lWidth) + "}", lData);  
+        }
+        Console.Write(" |");
+        Console.Write("\n");
+        // sep
+        Console.Write("+-");
+        for(int i = 0; i < lReader.FieldCount; i++) {
+            if(i != 0) Console.Write("-+-");
+            string lData = lReader.GetName(i);
+            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            for(int j = 0; j < lWidth; j++) {
+                Console.Write("-");
+            }
+        }
+        Console.Write("-+");
+        Console.Write("\n");
+        // row
+        while(lReader.Read()) {
+            Console.Write("| ");
+            for(int i= 0; i < lReader.FieldCount; i++) {
+                if(i != 0) Console.Write(" | ");
+                string lData = lReader[i].ToString();
+                int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+                Console.Write("{0," + (-lWidth) + "}", lData);  
+            }
+            Console.Write(" |");
+            Console.Write("\n");
+        }
+        // sep
+        Console.Write("+-");
+        for(int i = 0; i < lReader.FieldCount; i++) {
+            if(i != 0) Console.Write("-+-");
+            string lData = lReader.GetName(i);
+            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            for(int j = 0; j < lWidth; j++) {
+                Console.Write("-");
+            }
+        }
+        Console.Write("-+");
+        Console.Write("\n");
     }
     //===============================================
     public void queryValue(string sqlQuery) {
