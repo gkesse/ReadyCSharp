@@ -1,5 +1,6 @@
 //===============================================
 using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 //===============================================
 public sealed class GSQLite {
@@ -74,7 +75,7 @@ public sealed class GSQLite {
         Console.Write("\n");
         // header
         Console.Write("| ");
-        for(int i= 0; i < lReader.FieldCount; i++) {
+        for(int i = 0; i < lReader.FieldCount; i++) {
             if(i != 0) Console.Write(" | ");
             string lData = lReader.GetName(i);
             int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
@@ -97,7 +98,7 @@ public sealed class GSQLite {
         // row
         while(lReader.Read()) {
             Console.Write("| ");
-            for(int i= 0; i < lReader.FieldCount; i++) {
+            for(int i = 0; i < lReader.FieldCount; i++) {
                 if(i != 0) Console.Write(" | ");
                 string lData = lReader[i].ToString();
                 int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
@@ -120,8 +121,43 @@ public sealed class GSQLite {
         Console.Write("\n");
     }
     //===============================================
-    public void queryValue(string sqlQuery) {
-
+    public string queryValue(string sqlQuery) {
+        SQLiteCommand lCmd = open();
+        lCmd.CommandText = sqlQuery;
+        SQLiteDataReader lReader = lCmd.ExecuteReader();
+        string lData = "";
+        while(lReader.Read()) {
+            lData = lReader[0].ToString();
+            break;
+        }
+        return lData;
+    }
+    //===============================================
+    public List<string> queryCol(string sqlQuery) {
+        SQLiteCommand lCmd = open();
+        lCmd.CommandText = sqlQuery;
+        SQLiteDataReader lReader = lCmd.ExecuteReader();
+        List<string> lDataMap = new List<string>();
+        while(lReader.Read()) {
+            string lData = lReader[0].ToString();
+            lDataMap.Add(lData);
+        }
+        return lDataMap;
+    }
+    //===============================================
+    public List<string> queryRow(string sqlQuery) {
+        SQLiteCommand lCmd = open();
+        lCmd.CommandText = sqlQuery;
+        SQLiteDataReader lReader = lCmd.ExecuteReader();
+        List<string> lDataMap = new List<string>();
+        while(lReader.Read()) {
+            for(int i = 0; i < lReader.FieldCount; i++) {
+                string lData = lReader[i].ToString();
+                lDataMap.Add(lData);
+            }
+            break;
+        }
+        return lDataMap;
     }
     //===============================================
 }
