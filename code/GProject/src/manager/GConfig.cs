@@ -40,5 +40,17 @@ public sealed class GConfig {
         return lValue;
     }
     //===============================================
+    public void saveData(string key) {
+        string lValue = getData(key);
+        int lCount = GManager.Instance.countData(key);
+        if(lCount == 0) GManager.Instance.insertData(key, lValue);
+        else GManager.Instance.updateData(key, lValue);
+    }
+    //===============================================
+    public void loadData(string key) {
+        string lValue = GManager.Instance.getData(key);
+        setData(key, lValue);
+    }
+    //===============================================
 }
 //===============================================
