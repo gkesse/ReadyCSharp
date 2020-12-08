@@ -55,7 +55,7 @@ public sealed class GSQLite {
         lCmd.ExecuteNonQuery();
     }
     //===============================================
-    public void queryShow(string sqlQuery, string widthMap = " ", int defaultWidth = 20) {
+    public void queryShow(string sqlQuery, string widthMap = "", int defaultWidth = 20) {
         SQLiteCommand lCmd = open();
         lCmd.CommandText = sqlQuery;
         SQLiteDataReader lReader = lCmd.ExecuteReader();
