@@ -86,7 +86,9 @@ public sealed class GManager {
         string[] lWidthMap = widthMap.Split(';');
         int lLength = lWidthMap.Length;
         if(index >= lLength) return defaultWidth;
-        int lWidth = int.Parse(lWidthMap[index]);
+        string lWidthId = lWidthMap[index]; int lOut;
+        if(!int.TryParse(lWidthId, out lOut)) return defaultWidth;
+        int lWidth = int.Parse(lWidthId);
         return lWidth;
     }
     //===============================================

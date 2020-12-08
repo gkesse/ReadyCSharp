@@ -36,7 +36,7 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        GSQLite.Instance.queryValue("ooo");
+        GSQLite.Instance.init();
     }
     //===============================================
     public void runUi(string[] args) {

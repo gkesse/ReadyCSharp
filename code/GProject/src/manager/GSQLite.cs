@@ -37,6 +37,10 @@ public sealed class GSQLite {
     //===============================================
     // method
     //===============================================
+    public void init() {
+        
+    }
+    //===============================================
     public SQLiteCommand open() {
         sGApp lApp = GManager.Instance.getData().app;
         SQLiteConnection lCon = new SQLiteConnection("Data Source=" + lApp.sqlite_db_path);
@@ -51,13 +55,10 @@ public sealed class GSQLite {
         lCmd.ExecuteNonQuery();
     }
     //===============================================
-    public void queryShow(string sqlQuery) {
+    public void queryShow(string sqlQuery, string widthMap = " ", int defaultWidth = 20) {
         SQLiteCommand lCmd = open();
         lCmd.CommandText = sqlQuery;
         SQLiteDataReader lReader = lCmd.ExecuteReader();
-        //
-        string widthMap = "20;20;20;10";
-        int defaultWidth = 30;
         string[] lWidthMap = widthMap.Split(';');
         // sep
         Console.Write("+-");
