@@ -19,10 +19,10 @@ public sealed class GSQLite {
         queryWrite(lQuery);
         // tables
         lQuery = @"
-        select * from sqlite_master
+        select name, rootpage from sqlite_master
         where type = 'table'
         ";
-        queryShow(lQuery);
+        GManager.Instance.showData(queryMap(lQuery));
     }
     //===============================================
     public static GSQLite Instance {

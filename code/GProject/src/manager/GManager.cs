@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.Generic;
 //===============================================
 // manager
 //===============================================
@@ -44,6 +45,10 @@ public sealed class GManager {
         return mgr;
     }
     //===============================================
+    public void showData(string data) {
+        Console.Write("[{0}]\n", data);
+    }
+    //===============================================
     public void showData(string[] data) {
         Console.Write("[");
         for(int i = 0; i < data.Length; i++) {
@@ -54,8 +59,27 @@ public sealed class GManager {
         Console.Write("]\n");
     }
     //===============================================
-    public void showData(string data) {
-        Console.Write(data + "\n");
+    public void showData(List<string> data) {
+        Console.Write("[");
+        for(int i = 0; i < data.Count; i++) {
+            if(i != 0) Console.Write(" ; ");
+            string lData = data[i];
+            Console.Write(lData);
+        }
+        Console.Write("]\n");
+    }
+    //===============================================
+    public void showData(List<List<string>> data) {
+        for(int i = 0; i < data.Count; i++) {
+            List<string> lDataMap = data[i];
+            Console.Write("[");
+            for(int j = 0; j < lDataMap.Count; j++) {
+                if(j != 0) Console.Write(" ; ");
+                string lData = lDataMap[j];
+                Console.Write(lData);
+            }
+            Console.Write("]\n");
+        }
     }
     //===============================================
     // system
