@@ -160,5 +160,21 @@ public sealed class GSQLite {
         return lDataMap;
     }
     //===============================================
+    public List<List<string>> queryMap(string sqlQuery) {
+        SQLiteCommand lCmd = open();
+        lCmd.CommandText = sqlQuery;
+        SQLiteDataReader lReader = lCmd.ExecuteReader();
+        List<List<string>> lDataMap = new List<List<string>>();
+        while(lReader.Read()) {
+            List<string> lDataRow = new List<string>();
+            for(int i = 0; i < lReader.FieldCount; i++) {
+                string lData = lReader[i].ToString();
+                lDataRow.Add(lData);
+            }
+            lDataMap.Add(lDataRow);
+        }
+        return lDataMap;
+    }
+    //===============================================
 }
 //===============================================
