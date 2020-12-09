@@ -83,7 +83,11 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_SHOW_TABLES(string[] args) {
-        Console.WriteLine("run_SHOW_TABLES");
+        Console.Write("\n");
+        string lQuery = String.Format(@"
+        select * from config_data
+        ");
+        GSQLite.Instance().queryShow(lQuery);
         G_STATE = "S_SAVE";
     }
     //===============================================

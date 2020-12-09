@@ -114,43 +114,6 @@ public sealed class GManager {
         return lWidth;
     }
     //===============================================
-    // config_data
-    //===============================================
-    public int countData(string key) {
-        string lQuery = String.Format(@"
-        select count(*) from config_data
-        where config_key = '{0}'
-        ", key);
-        int lCount = int.Parse(GSQLite.Instance().queryValue(lQuery));
-        return lCount;
-    }
-    //===============================================
-    public string getData(string key) {
-        string lQuery = String.Format(@"
-        select config_value from config_data
-        where config_key = '{0}'
-        ", key);
-        string lValue = GSQLite.Instance().queryValue(lQuery);
-        return lValue;
-    }
-    //===============================================
-    public void insertData(string key, string valueId) {
-        string lQuery = String.Format(@"
-        insert into config_data (config_key, config_value)
-        values ('{0}', '{1}')
-        ", key, valueId);
-        GSQLite.Instance().queryWrite(lQuery);
-    }
-    //===============================================
-    public void updateData(string key, string valueId) {
-        string lQuery = String.Format(@"
-        update config_data 
-        set config_value = {1}
-        where config_key = '{0}'
-        ", key, valueId);
-        GSQLite.Instance().queryWrite(lQuery);
-    }
-    //===============================================
 }
 //===============================================
 // struct
