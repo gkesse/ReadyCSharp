@@ -38,6 +38,7 @@ public sealed class GSQLiteUi {
             else if(G_STATE == "S_SHOW_TABLES") {run_SHOW_TABLES(args);}
             else if(G_STATE == "S_CONFIG_SHARP_SHOW_DATA") {run_CONFIG_SHARP_SHOW_DATA(args);}
             else if(G_STATE == "S_CONFIG_SHARP_SHOW_SCHEMA") {run_CONFIG_SHARP_SHOW_SCHEMA(args);}
+            else if(G_STATE == "S_CONFIG_SHARP_DELETE") {run_CONFIG_SHARP_DELETE(args);}
             //
             else if(G_STATE == "S_SAVE") {run_SAVE(args);}
             else if(G_STATE == "S_LOAD") {run_LOAD(args);}
@@ -84,6 +85,7 @@ public sealed class GSQLiteUi {
         else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES"; GConfig.Instance().setData("G_SQLITE_ID", lAnswer);} 
         else if(lAnswer == "2") {G_STATE = "S_CONFIG_SHARP_SHOW_DATA"; GConfig.Instance().setData("G_SQLITE_ID", lAnswer);} 
         else if(lAnswer == "3") {G_STATE = "S_CONFIG_SHARP_SHOW_SCHEMA"; GConfig.Instance().setData("G_SQLITE_ID", lAnswer);} 
+        else if(lAnswer == "4") {G_STATE = "S_CONFIG_SHARP_DELETE"; GConfig.Instance().setData("G_SQLITE_ID", lAnswer);} 
         //
     }
     //===============================================
@@ -109,11 +111,21 @@ public sealed class GSQLiteUi {
     public void run_CONFIG_SHARP_SHOW_SCHEMA(string[] args) {
         Console.Write("\n");
         string lQuery = String.Format(@"
-        select name from sqlite_master
+        select sql from sqlite_master
         where type = 'table'
         and name = 'config_data'
         ");
-        GSQLite.Instance().queryShow(lQuery);
+        string lValue = GSQLite.Instance().queryValue(lQuery);
+        GManager.Instance().showData(lValue);
+        G_STATE = "S_SAVE";
+    }
+    //===============================================
+    public void run_CONFIG_SHARP_DELETE(string[] args) {
+        Console.Write("\n");
+        string lQuery = String.Format(@"
+        drop table if exists config_data
+        ");
+        GSQLite.Instance().queryWrite(lQuery);
         G_STATE = "S_SAVE";
     }
     //===============================================

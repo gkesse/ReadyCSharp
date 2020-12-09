@@ -15,11 +15,11 @@ public sealed class GSQLite {
     GSQLite() {
         string lQuery;
         // config_data
-        lQuery = @"
+        lQuery = String.Format(@"
         create table if not exists config_data (
         config_key text,
         config_value text)
-        ";
+        ");
         queryWrite(lQuery);
     }
     //===============================================
