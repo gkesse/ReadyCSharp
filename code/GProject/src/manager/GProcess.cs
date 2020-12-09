@@ -32,6 +32,7 @@ public sealed class GProcess {
         if(args.Length > 0) lKey = args[0];
         if(lKey == "test") {runTest(args); return;}
         if(lKey == "ui") {runUi(args); return;}
+        if(lKey == "qt") {runQt(args); return;}
         runTest(args);
     }
     //===============================================
@@ -41,6 +42,10 @@ public sealed class GProcess {
     //===============================================
     public void runUi(string[] args) {
         GProcessUi.Instance().run(args);
+    }
+    //===============================================
+    public void runQt(string[] args) {
+        GQt.Instance().run(args);
     }
     //===============================================
 }

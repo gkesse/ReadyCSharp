@@ -7,14 +7,20 @@ GSRCS = \
     $(GSRC)\manager\\*.cs \
 
 GLIBS =\
-    /lib:lib\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net40 \
+    /lib:bin \
     /r:System.Data.SQLite.dll \
+    /r:QtWidgetsSharp.dll \
+    /r:QtGuiSharp.dll \
+    /r:QtCoreSharp.dll \
 
+GCFLAGS =\
+    -unsafe \
+    
 all: clean compile run
 
 compile:
 	@if not exist $(GBIN) @mkdir $(GBIN)
-	csc $(GLIBS) /out:$(GTARGET) $(GSRCS)
+	csc $(GCFLAGS) $(GLIBS) /out:$(GTARGET) $(GSRCS)
 run: 
 	@$(GTARGET) $(argv)
 clean: 
