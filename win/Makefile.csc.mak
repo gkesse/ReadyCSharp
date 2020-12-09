@@ -9,9 +9,9 @@ GSRCS = \
 GLIBS =\
     /lib:bin \
     /r:System.Data.SQLite.dll \
-    /r:QtWidgetsSharp.dll \
-    /r:QtGuiSharp.dll \
-    /r:QtCoreSharp.dll \
+    /r:QtWidgets.Sharp.dll \
+    /r:QtGui.Sharp.dll \
+    /r:QtCore.Sharp.dll \
 
 GCFLAGS =\
     -unsafe \
