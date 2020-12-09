@@ -33,6 +33,7 @@ public sealed class GProcess {
         if(lKey == "test") {runTest(args); return;}
         if(lKey == "ui") {runUi(args); return;}
         if(lKey == "qt") {runQt(args); return;}
+        if(lKey == "opencv") {runOpenCV(args); return;}
         runTest(args);
     }
     //===============================================
@@ -46,6 +47,10 @@ public sealed class GProcess {
     //===============================================
     public void runQt(string[] args) {
         GQt.Instance().run(args);
+    }
+    //===============================================
+    public void runOpenCV(string[] args) {
+        GOpenCV.Instance().run(args);
     }
     //===============================================
 }
