@@ -3,25 +3,29 @@ using System;
 //===============================================
 public sealed class GSQLiteUi {
     //===============================================
+    // property
+    //===============================================
     private static GSQLiteUi m_instance = null;
     private static readonly object padlock = new object();
     //===============================================
     private string G_STATE;
     //===============================================
+    // constructor
+    //===============================================
     GSQLiteUi() {
 
     }
     //===============================================
-    public static GSQLiteUi Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GSQLiteUi();
-                }
-                return m_instance;
+    public static GSQLiteUi Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GSQLiteUi();
             }
+            return m_instance;
         }
     }
+    //===============================================
+    // method
     //===============================================
     public void run(string[] args) {
         G_STATE = "S_INIT";
@@ -41,7 +45,7 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_ADMIN(string[] args) {
-        GProcessUi.Instance.run(args);
+        GProcessUi.Instance().run(args);
         G_STATE = "S_END";
     }
     //===============================================
@@ -66,7 +70,7 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = GConfig.Instance.getData("G_SQLITE_ID");
+        string lLast = GConfig.Instance().getData("G_SQLITE_ID");
         Console.Write("SQLITE_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
@@ -74,7 +78,7 @@ public sealed class GSQLiteUi {
         else if(lAnswer == "-i") G_STATE = "S_INIT";
         else if(lAnswer == "-a") G_STATE = "S_ADMIN";
         //
-        else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES"; GConfig.Instance.setData("G_SQLITE_ID", lAnswer);} 
+        else if(lAnswer == "1") {G_STATE = "S_SHOW_TABLES"; GConfig.Instance().setData("G_SQLITE_ID", lAnswer);} 
         //
     }
     //===============================================
@@ -84,10 +88,12 @@ public sealed class GSQLiteUi {
     }
     //===============================================
     public void run_SAVE(string[] args) {
+        GConfig.Instance().saveData("G_SQLITE_ID");
         G_STATE = "S_QUIT";
     }
     //===============================================
     public void run_LOAD(string[] args) {
+        GConfig.Instance().loadData("G_SQLITE_ID");
         G_STATE = "S_METHOD";
     }
     //===============================================

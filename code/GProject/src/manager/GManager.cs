@@ -28,14 +28,12 @@ public sealed class GManager {
         mgr.app.sqlite_db_path = getEnv("GSQLITE_DB_PATH");
     }
     //===============================================
-    public static GManager Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GManager();
-                }
-                return m_instance;
+    public static GManager Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GManager();
             }
+            return m_instance;
         }
     }
     //===============================================
@@ -123,7 +121,7 @@ public sealed class GManager {
         select count(*) from config_data
         where config_key = '{0}'
         ", key);
-        int lCount = int.Parse(GSQLite.Instance.queryValue(lQuery));
+        int lCount = int.Parse(GSQLite.Instance().queryValue(lQuery));
         return lCount;
     }
     //===============================================
@@ -132,7 +130,7 @@ public sealed class GManager {
         select config_value from config_data
         where config_key = '{0}'
         ", key);
-        string lValue = GSQLite.Instance.queryValue(lQuery);
+        string lValue = GSQLite.Instance().queryValue(lQuery);
         return lValue;
     }
     //===============================================
@@ -141,7 +139,7 @@ public sealed class GManager {
         insert into config_data (config_key, config_value)
         values ('{0}', '{1}')
         ", key, valueId);
-        GSQLite.Instance.queryWrite(lQuery);
+        GSQLite.Instance().queryWrite(lQuery);
     }
     //===============================================
     public void updateData(string key, string valueId) {
@@ -150,7 +148,7 @@ public sealed class GManager {
         set config_value = {1}
         where config_key = '{0}'
         ", key, valueId);
-        GSQLite.Instance.queryWrite(lQuery);
+        GSQLite.Instance().queryWrite(lQuery);
     }
     //===============================================
 }

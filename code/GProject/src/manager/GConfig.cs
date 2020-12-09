@@ -17,14 +17,12 @@ public sealed class GConfig {
         m_dataMap = new Dictionary<string, string>();
     }
     //===============================================
-    public static GConfig Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GConfig();
-                }
-                return m_instance;
+    public static GConfig Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GConfig();
             }
+            return m_instance;
         }
     }
     //===============================================
@@ -42,13 +40,13 @@ public sealed class GConfig {
     //===============================================
     public void saveData(string key) {
         string lValue = getData(key);
-        int lCount = GManager.Instance.countData(key);
-        if(lCount == 0) GManager.Instance.insertData(key, lValue);
-        else GManager.Instance.updateData(key, lValue);
+        int lCount = GManager.Instance().countData(key);
+        if(lCount == 0) GManager.Instance().insertData(key, getData(key));
+        else GManager.Instance().updateData(key, getData(key));
     }
     //===============================================
     public void loadData(string key) {
-        string lValue = GManager.Instance.getData(key);
+        string lValue = GManager.Instance().getData(key);
         setData(key, lValue);
     }
     //===============================================

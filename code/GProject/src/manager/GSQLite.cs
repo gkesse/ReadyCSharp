@@ -5,8 +5,12 @@ using System.Data.SQLite;
 //===============================================
 public sealed class GSQLite {
     //===============================================
+    // property
+    //===============================================
     private static GSQLite m_instance = null;
     private static readonly object padlock = new object();
+    //===============================================
+    // constructor
     //===============================================
     GSQLite() {
         string lQuery;
@@ -17,33 +21,21 @@ public sealed class GSQLite {
         config_value text)
         ";
         queryWrite(lQuery);
-        // tables
-        lQuery = @"
-        select name, rootpage from sqlite_master
-        where type = 'table'
-        ";
-        GManager.Instance.showData(queryMap(lQuery));
     }
     //===============================================
-    public static GSQLite Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GSQLite();
-                }
-                return m_instance;
+    public static GSQLite Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GSQLite();
             }
+            return m_instance;
         }
     }
     //===============================================
     // method
     //===============================================
-    public void init() {
-        
-    }
-    //===============================================
     public SQLiteCommand open() {
-        sGApp lApp = GManager.Instance.getData().app;
+        sGApp lApp = GManager.Instance().getData().app;
         SQLiteConnection lCon = new SQLiteConnection("Data Source=" + lApp.sqlite_db_path);
         lCon.Open();
         SQLiteCommand lCmd = new SQLiteCommand(lCon);
@@ -66,7 +58,7 @@ public sealed class GSQLite {
         for(int i = 0; i < lReader.FieldCount; i++) {
             if(i != 0) Console.Write("-+-");
             string lData = lReader.GetName(i);
-            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            int lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth);
             for(int j = 0; j < lWidth; j++) {
                 Console.Write("-");
             }
@@ -78,7 +70,7 @@ public sealed class GSQLite {
         for(int i = 0; i < lReader.FieldCount; i++) {
             if(i != 0) Console.Write(" | ");
             string lData = lReader.GetName(i);
-            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            int lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth);
             Console.Write("{0," + (-lWidth) + "}", lData);  
         }
         Console.Write(" |");
@@ -88,7 +80,7 @@ public sealed class GSQLite {
         for(int i = 0; i < lReader.FieldCount; i++) {
             if(i != 0) Console.Write("-+-");
             string lData = lReader.GetName(i);
-            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            int lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth);
             for(int j = 0; j < lWidth; j++) {
                 Console.Write("-");
             }
@@ -101,7 +93,7 @@ public sealed class GSQLite {
             for(int i = 0; i < lReader.FieldCount; i++) {
                 if(i != 0) Console.Write(" | ");
                 string lData = lReader[i].ToString();
-                int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+                int lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth);
                 Console.Write("{0," + (-lWidth) + "}", lData);  
             }
             Console.Write(" |");
@@ -112,13 +104,14 @@ public sealed class GSQLite {
         for(int i = 0; i < lReader.FieldCount; i++) {
             if(i != 0) Console.Write("-+-");
             string lData = lReader.GetName(i);
-            int lWidth = GManager.Instance.getWidth(widthMap, i, defaultWidth);
+            int lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth);
             for(int j = 0; j < lWidth; j++) {
                 Console.Write("-");
             }
         }
         Console.Write("-+");
         Console.Write("\n");
+        lReader.Close();
     }
     //===============================================
     public string queryValue(string sqlQuery) {
@@ -130,6 +123,7 @@ public sealed class GSQLite {
             lData = lReader[0].ToString();
             break;
         }
+        lReader.Close();
         return lData;
     }
     //===============================================
@@ -142,6 +136,7 @@ public sealed class GSQLite {
             string lData = lReader[0].ToString();
             lDataMap.Add(lData);
         }
+        lReader.Close();
         return lDataMap;
     }
     //===============================================
@@ -157,6 +152,7 @@ public sealed class GSQLite {
             }
             break;
         }
+        lReader.Close();
         return lDataMap;
     }
     //===============================================
@@ -173,6 +169,7 @@ public sealed class GSQLite {
             }
             lDataMap.Add(lDataRow);
         }
+        lReader.Close();
         return lDataMap;
     }
     //===============================================

@@ -36,11 +36,11 @@ public sealed class GProcess {
     }
     //===============================================
     public void runTest(string[] args) {
-        GSQLite.Instance.init();
+        GSQLite.Instance();
     }
     //===============================================
     public void runUi(string[] args) {
-        GProcessUi.Instance.run(args);
+        GProcessUi.Instance().run(args);
     }
     //===============================================
 }

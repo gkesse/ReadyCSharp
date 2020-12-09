@@ -3,25 +3,29 @@ using System;
 //===============================================
 public sealed class GProcessUi {
     //===============================================
+    // property
+    //===============================================
     private static GProcessUi m_instance = null;
     private static readonly object padlock = new object();
     //===============================================
     private string G_STATE;
     //===============================================
+    // constructor
+    //===============================================
     GProcessUi() {
 
     }
     //===============================================
-    public static GProcessUi Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GProcessUi();
-                }
-                return m_instance;
+    public static GProcessUi Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GProcessUi();
             }
+            return m_instance;
         }
     }
+    //===============================================
+    // method
     //===============================================
     public void run(string[] args) {
         G_STATE = "S_INIT";
@@ -56,19 +60,19 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_CHOICE(string[] args) {
-        string lLast = GConfig.Instance.getData("G_CSHARP_ID");
+        string lLast = GConfig.Instance().getData("G_CSHARP_ID");
         Console.Write("CSHARP_ADMIN ({0}) ? : ", lLast);
         string lAnswer = Console.ReadLine();
         if(lAnswer == "") lAnswer = lLast;
         if(lAnswer == "-q") G_STATE = "S_END";
         //
-        else if(lAnswer == "1") {G_STATE = "S_SQLITE"; GConfig.Instance.setData("G_CSHARP_ID", lAnswer);} 
-        else if(lAnswer == "2") {G_STATE = "S_OPENCV"; GConfig.Instance.setData("G_CSHARP_ID", lAnswer);}
+        else if(lAnswer == "1") {G_STATE = "S_SQLITE"; GConfig.Instance().setData("G_CSHARP_ID", lAnswer);} 
+        else if(lAnswer == "2") {G_STATE = "S_OPENCV"; GConfig.Instance().setData("G_CSHARP_ID", lAnswer);}
         //
     }
     //===============================================
     public void run_SQLITE(string[] args) {
-        GSQLiteUi.Instance.run(args);
+        GSQLiteUi.Instance().run(args);
         G_STATE = "S_SAVE";
     }
     //===============================================
@@ -78,10 +82,12 @@ public sealed class GProcessUi {
     }
     //===============================================
     public void run_SAVE(string[] args) {
-        G_STATE = "S_QUIT";
+        GConfig.Instance().saveData("G_CSHARP_ID");
+        G_STATE = "S_END";
     }
     //===============================================
     public void run_LOAD(string[] args) {
+        GConfig.Instance().loadData("G_CSHARP_ID");
         G_STATE = "S_METHOD";
     }
     //===============================================
