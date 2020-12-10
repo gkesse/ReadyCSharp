@@ -12,6 +12,7 @@ GLIBS =\
     /r:QtWidgets.Sharp.dll \
     /r:QtGui.Sharp.dll \
     /r:QtCore.Sharp.dll \
+    /r:Emgu.CV.World.dll \
 
 GCFLAGS =\
     -unsafe \
@@ -20,7 +21,7 @@ all: clean compile run
 
 compile:
 	@if not exist $(GBIN) @mkdir $(GBIN)
-	csc $(GCFLAGS) $(GLIBS) /out:$(GTARGET) $(GSRCS)
+	@csc $(GCFLAGS) $(GLIBS) /out:$(GTARGET) $(GSRCS)
 run: 
 	@$(GTARGET) $(argv)
 clean: 

@@ -14,14 +14,12 @@ public sealed class GProcess {
 
     }
     //===============================================
-    public static GProcess Instance {
-        get {
-            lock (padlock) {
-                if (m_instance == null) {
-                    m_instance = new GProcess();
-                }
-                return m_instance;
+    public static GProcess Instance() {
+        lock (padlock) {
+            if (m_instance == null) {
+                m_instance = new GProcess();
             }
+            return m_instance;
         }
     }
     //===============================================

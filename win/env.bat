@@ -3,6 +3,7 @@
 set "PATH=C:\MinGW\bin;%PATH%" 
 set "PATH=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%PATH%"
 set "PATH=C:\Users\Admin\Downloads;%PATH%"
+set "PATH=C:\Emgu\emgucv-windesktop 3.2.0.2682\bin\x64;%PATH%"
 set "PATH=C:\Qt\5.15.0\mingw81_64\bin;%PATH%"
 ::===============================================
 set "GPROJECT_ROOT=C:\Users\Admin\Downloads\Programs"
@@ -18,7 +19,7 @@ set "GIMG_PATH=%GDATA_PATH%\img"
 set "GPDF_PATH=%GDATA_PATH%\pdf\config.pdf"
 set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 ::===============================================
-set "GNUGET_PACKAGE_NAME=QtSharp"
+set "GNUGET_PACKAGE_NAME=Emgu.CV"
 set "GNUGET_PACKAGE_DIR=lib"
 ::===============================================
 set "GDOTNET_PROJECT_PATH=%GPROJECT_PATH%\win"
