@@ -36,6 +36,7 @@ public sealed class GProcessUi {
             //
             else if(G_STATE == "S_SQLITE") {run_SQLITE(args);}
             else if(G_STATE == "S_OPENCV") {run_OPENCV(args);}
+            else if(G_STATE == "S_STRING") {run_STRING(args);}
             //
             else if(G_STATE == "S_SAVE") {run_SAVE(args);}
             else if(G_STATE == "S_LOAD") {run_LOAD(args);}
@@ -56,6 +57,8 @@ public sealed class GProcessUi {
         Console.Write("\t{0,-2} : {1}\n", "1", "S_SQLITE");
         Console.Write("\t{0,-2} : {1}\n", "2", "S_OPENCV");
         Console.Write("\n");
+        Console.Write("\t{0,-2} : {1}\n", "10", "S_STRING");
+        Console.Write("\n");
         G_STATE = "S_CHOICE";
     }
     //===============================================
@@ -69,6 +72,8 @@ public sealed class GProcessUi {
         else if(lAnswer == "1") {G_STATE = "S_SQLITE"; GConfig.Instance().setData("G_CSHARP_ID", lAnswer);} 
         else if(lAnswer == "2") {G_STATE = "S_OPENCV"; GConfig.Instance().setData("G_CSHARP_ID", lAnswer);}
         //
+        else if(lAnswer == "10") {G_STATE = "S_STRING"; GConfig.Instance().setData("G_CSHARP_ID", lAnswer);}
+        //
     }
     //===============================================
     public void run_SQLITE(string[] args) {
@@ -78,6 +83,11 @@ public sealed class GProcessUi {
     //===============================================
     public void run_OPENCV(string[] args) {
         Console.WriteLine("run_OPENCV");
+        G_STATE = "S_SAVE";
+    }
+    //===============================================
+    public void run_STRING(string[] args) {
+        GStringUi.Instance().run(args);
         G_STATE = "S_SAVE";
     }
     //===============================================

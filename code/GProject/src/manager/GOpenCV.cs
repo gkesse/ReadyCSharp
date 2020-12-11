@@ -29,7 +29,7 @@ public sealed class GOpenCV {
     // method
     //===============================================
     public void run(string[] args) {
-CvInvoke.CheckLibraryLoaded();
+//CvInvoke.CheckLibraryLoaded();
             String win1 = "Test Window"; //The name of the window
             CvInvoke.NamedWindow(win1); //Create the window using the specific name
 
