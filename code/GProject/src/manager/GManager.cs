@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
+using Emgu.CV.Structure;
 //===============================================
 // manager
 //===============================================
@@ -26,6 +27,10 @@ public sealed class GManager {
         mgr.app.cmd_path = getEnv("GCMD_PATH");
         mgr.app.bin_path = getEnv("GBIN_PATH");
         mgr.app.sqlite_db_path = getEnv("GSQLITE_DB_PATH");
+        mgr.app.win_width = 640;
+        mgr.app.win_height = 480;
+        mgr.app.win_bg_color = new Rgb(0x50, 0x30, 0x30);
+        mgr.app.win_fg_color = new Rgb(0x50, 0x50, 0x50);
     }
     //===============================================
     public static GManager Instance() {
@@ -131,5 +136,10 @@ public struct sGApp {
     public string bin_path;
     // sqlite
     public string sqlite_db_path;
+    // win
+    public int win_width;
+    public int win_height;
+    public Rgb win_bg_color;
+    public Rgb win_fg_color;
 }
 //===============================================

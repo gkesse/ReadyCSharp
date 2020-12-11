@@ -29,26 +29,15 @@ public sealed class GOpenCV {
     // method
     //===============================================
     public void run(string[] args) {
-//CvInvoke.CheckLibraryLoaded();
-            String win1 = "Test Window"; //The name of the window
-            CvInvoke.NamedWindow(win1); //Create the window using the specific name
-
-            Mat img = new Mat(200, 400, DepthType.Cv8U, 3); //Create a 3 channel image of 400x200
-            img.SetTo(new Bgr(255, 0, 0).MCvScalar); // set it to Blue color
-
-            //Draw "Hello, world." on the image using the specific font
-            CvInvoke.PutText(
-               img,
-               "Hello, world",
-               new System.Drawing.Point(10, 80),
-               FontFace.HersheyComplex,
-               1.0,
-               new Bgr(0, 255, 0).MCvScalar);
-
-
-            CvInvoke.Imshow(win1, img); //Show the image
-            CvInvoke.WaitKey(0);  //Wait for the key pressing event
-            CvInvoke.DestroyAllWindows(); //Destroy all windows if key is pressed
+        sGApp lApp = GManager.Instance().getData().app;
+        CvInvoke.NamedWindow(lApp.app_name); 
+        Mat lImg = new Mat(lApp.win_height, lApp.win_width, DepthType.Cv8U, 3); 
+        lImg.SetTo(lApp.win_bg_color.MCvScalar); 
+        CvInvoke.PutText(lImg, "HBonjour tout le monde", new System.Drawing.Point(10, 80), 
+        FontFace.HersheyComplex, 1.0, lApp.win_fg_color.MCvScalar);
+        CvInvoke.Imshow(lApp.app_name, lImg);
+        CvInvoke.WaitKey(0);  
+        CvInvoke.DestroyAllWindows();
     }
     //===============================================
 }
