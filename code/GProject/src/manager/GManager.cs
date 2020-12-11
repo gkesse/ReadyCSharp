@@ -29,8 +29,8 @@ public sealed class GManager {
         mgr.app.sqlite_db_path = getEnv("GSQLITE_DB_PATH");
         mgr.app.win_width = 640;
         mgr.app.win_height = 480;
-        mgr.app.win_bg_color = new Rgb(0x50, 0x30, 0x30);
-        mgr.app.win_fg_color = new Rgb(0x50, 0x50, 0x50);
+        mgr.app.win_bg_color = new Bgr(0x10, 0x10, 0x30);
+        mgr.app.win_fg_color = new Bgr(0xFF, 0xFF, 0xFF);
     }
     //===============================================
     public static GManager Instance() {
@@ -139,7 +139,7 @@ public struct sGApp {
     // win
     public int win_width;
     public int win_height;
-    public Rgb win_bg_color;
-    public Rgb win_fg_color;
+    public Bgr win_bg_color;
+    public Bgr win_fg_color;
 }
 //===============================================

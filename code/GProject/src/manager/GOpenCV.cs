@@ -33,7 +33,7 @@ public sealed class GOpenCV {
         CvInvoke.NamedWindow(lApp.app_name); 
         Mat lImg = new Mat(lApp.win_height, lApp.win_width, DepthType.Cv8U, 3); 
         lImg.SetTo(lApp.win_bg_color.MCvScalar); 
-        CvInvoke.PutText(lImg, "HBonjour tout le monde", new System.Drawing.Point(10, 80), 
+        CvInvoke.PutText(lImg, "Bonjour tout le monde", new System.Drawing.Point(10, 80), 
         FontFace.HersheyComplex, 1.0, lApp.win_fg_color.MCvScalar);
         CvInvoke.Imshow(lApp.app_name, lImg);
         CvInvoke.WaitKey(0);  
