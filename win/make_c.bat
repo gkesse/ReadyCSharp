@@ -1,12 +1,11 @@
 @echo off
 ::===============================================
 set "args=%*"             
-setlocal ENABLEDELAYEDEXPANSION
-set "_args=%*"             
-set "_args=!_args:*%1 =!"  
-endlocal && ( set "args=%_args%" )
-echo  aa %args%
+setlocal enabledelayedexpansion
+set "lArgs=%*"             
+set "lArgs=!lArgs:*%1 =!"  
+endlocal && ( set "args=%lArgs%" )
 ::===============================================
 
-mingw32-make -f Makefile.csc.mak %1 arg2=%2
+mingw32-make -f Makefile.csc.mak %1 argv=%args%
 ::===============================================
