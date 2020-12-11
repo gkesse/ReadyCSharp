@@ -64,18 +64,22 @@ public sealed class GConfig {
     }
     //===============================================
     public void insertData(string key, string valueId) {
+        key = key.Replace("'", "''");
+        valueId = valueId.Replace("'", "''");
         string lQuery = String.Format(@"
         insert into config_data (config_key, config_value)
         values ('{0}', '{1}')
-        ", @key, @valueId);
+        ", key, valueId);
         GSQLite.Instance().queryWrite(lQuery);
     }
     //===============================================
     public void updateData(string key, string valueId) {
+        key = key.Replace("'", "''");
+        valueId = valueId.Replace("'", "''");
         string lQuery = String.Format(@"
         update config_data 
-        set config_value = ""{1}""
-        where config_key = ""{0}""
+        set config_value = '{1}'
+        where config_key = '{0}'
         ", key, valueId);
         GSQLite.Instance().queryWrite(lQuery);
     }
