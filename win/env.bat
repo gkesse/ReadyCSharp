@@ -5,6 +5,7 @@ set "PATH=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%PATH%"
 set "PATH=C:\Users\Admin\Downloads;%PATH%"
 set "PATH=C:\Emgu\emgucv-windesktop 3.2.0.2682\bin\x64;%PATH%"
 set "PATH=C:\Qt\5.15.0\mingw81_64\bin;%PATH%"
+set "PATH=C:\Users\Admin\Downloads\QtSharp-0.7.6-Qt-5.12.4-MinGW;%PATH%"
 ::===============================================
 set "GPROJECT_ROOT=C:\Users\Admin\Downloads\Programs"
 set "GPROJECT_PATH=%GPROJECT_ROOT%\ReadyCSharp"

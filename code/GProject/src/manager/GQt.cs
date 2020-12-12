@@ -1,8 +1,8 @@
 //===============================================
 using System;
 using System.Collections.Generic;   
-using QtGui;
 using QtWidgets;
+using QtCore.Qt;
 //===============================================
 public sealed class GQt {
     //===============================================
@@ -10,8 +10,6 @@ public sealed class GQt {
     //===============================================
     private static GQt m_instance = null;
     private static readonly object padlock = new object();
-    //===============================================
-    private static QApplication m_app = null;
     //===============================================
     // constructor
     //===============================================
@@ -30,19 +28,26 @@ public sealed class GQt {
     //===============================================
     // method
     //===============================================
-    public void run(string[] args) {
-        QApplication lApp = App(args);
-        QPushButton lWindow = new QPushButton("TEXT", null);
+    public unsafe void run(string[] args) {
+        sGApp lApp = GManager.Instance().getData().app;
+        
+        int argc = 0;
+        lApp.app = new QApplication (ref argc, null);        
+        
+        QLabel lLabel = new QLabel();
+        lLabel.Text = "Bonjour tout le monde";
+        lLabel.Alignment = AlignmentFlag.AlignCenter;
+        
+        QVBoxLayout lMainLayout = new QVBoxLayout();
+        lMainLayout.AddWidget(lLabel);
+
+        QWidget lWindow = new QWidget();
+        lWindow.Layout = lMainLayout;
+        lWindow.Resize(lApp.win_width, lApp.win_height);
+        lWindow.WindowTitle = lApp.app_name;
         lWindow.Show();
+        
         QApplication.Exec();
-    }
-    //===============================================
-    public static unsafe QApplication App(string[] args) {
-        if(m_app == null) {
-            int argc = 0;
-            m_app = new QApplication (ref argc, null);        
-        }
-        return m_app;
     }
     //===============================================
 }

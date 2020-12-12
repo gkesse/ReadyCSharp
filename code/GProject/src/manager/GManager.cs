@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using Emgu.CV.Structure;
+using QtWidgets;
 //===============================================
 // manager
 //===============================================
@@ -129,6 +130,7 @@ public struct sGManager {
 //===============================================
 public struct sGApp {
     // app
+    public QApplication app;
     public string app_name;
     // cmd
     public string cmd_path;
