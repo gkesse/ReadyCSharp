@@ -3,9 +3,8 @@ using System;
 //===============================================
 class GMain {
     //===============================================
-    [STAThread]
-    static void Main(string[] args) {
-        GProcess.Instance().run(args);
+    static void Main(string[] args) {       
+        GProcess.Run(args);
     }
     //===============================================
 }

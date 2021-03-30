@@ -1,37 +1,47 @@
 #================================================
 GSRC = $(GPROJECT_SRC)
 GBIN = bin
-GTARGET = $(GBIN)\rdcsharp.exe
+GTARGET = $(GBIN)/rdcsharp.exe
 
-GSRCS = \
-    $(GSRC)\\*.cs \
-    $(GSRC)\manager\\*.cs \
+GSRCS =\
+    $(GSRC)/*.cs \
 
 GLIBS =\
-    /lib:bin \
-    /r:System.Data.SQLite.dll \
-    /r:QtWidgets.Sharp.dll \
-    /r:QtGui.Sharp.dll \
-    /r:QtCore.Sharp.dll \
-    /r:Emgu.CV.World.dll \
-
-GCFLAGS =\
-    -unsafe \
+    -lib:bin \
+    -r:Emgu.CV.World.dll \
     
+GCFLAGS =\
+
 #================================================
-# csharp
 all: clean compile run
 
 compile:
-	@if not exist $(GBIN) @mkdir $(GBIN)
+	@if ! [ -d $(GBIN) ] ; then mkdir -p $(GBIN) ; fi
 	@csc $(GCFLAGS) $(GLIBS) /out:$(GTARGET) $(GSRCS)
 run: 
 	@$(GTARGET) $(argv)
-clean: 
-	@if not exist $(GBIN) @mkdir $(GBIN)
-	@del /q $(GBIN)\*.exe
+clean:
+	@if ! [ -d $(GBIN) ] ; then mkdir -p $(GBIN) ; fi
+	rm -f $(GBIN)/*
+#================================================
+# mono
+mono_install:
+	@pacman -S --needed -y mingw-w64-i686-mono
+#================================================
+# sqlite
+sqlite_install:
+	@pacman -S --needed -y mingw-w64-i686-sqlite3
+sqlite_libs:
+	@pkg-config --libs sqlite3
+sqlite_flags:
+	@pkg-config --cflags sqlite3
+sqlite_search:
+	pkg-config --list-all | grep -ie "sqlite"
 #================================================
 # git
+git_install:
+	@pacman -S --needed -y git
+	@pacman -S --needed -y vim
 git_config:
 	@git config --global user.name "Gerard KESSE"
 	@git config --global user.email "tiakagerard@hotmail.com"
